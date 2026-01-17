@@ -1,4 +1,5 @@
 import { useSetAtom, useAtomValue } from 'jotai';
+import { Modal } from 'antd';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
 import {
@@ -46,14 +47,23 @@ export const useSummary = () => {
   const version = calculateVersion();
 
   const handleSubmit = () => {
-    console.log('Summary submitted:', {
-      gitOwner,
-      gitRepo,
-      env,
-      date,
-      version,
+    Modal.confirm({
+      title: 'Confirm Submission',
+      content: `Are you sure you want to submit the summary? with create Branch release/${version} on ${gitOwner}/${gitRepo}`,
+      okText: 'Confirm',
+      cancelText: 'Cancel',
+      onOk: () => {
+        console.log('Summary submitted:', {
+          gitOwner,
+          gitRepo,
+          env,
+          date,
+          version,
+          branch: `release/${version}`,
+        });
+        // 暂时不做任何事情
+      },
     });
-    // 暂时不做任何事情
   };
 
   const handleBack = () => {
