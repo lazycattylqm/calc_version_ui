@@ -13,7 +13,17 @@ function Index() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div className={styles.logo}>LOGO</div>
+        <div className={styles.logo}>
+          <img
+            src="/images/hsbc-logo.png"
+            alt="HSBC Logo"
+            className={styles.logoImage}
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+              e.currentTarget.parentElement!.textContent = 'LOGO';
+            }}
+          />
+        </div>
         <span>Index Header</span>
       </header>
       <div className={styles.body}>
