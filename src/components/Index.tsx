@@ -1,4 +1,5 @@
 import styles from './Index.module.css';
+import GitOwnerInput from './GitOwnerInput';
 
 function Index() {
   return (
@@ -7,7 +8,9 @@ function Index() {
         <div className={styles.logo}>LOGO</div>
         <span>Index Header</span>
       </header>
-      <div className={styles.body}>Body Content</div>
+      <div className={styles.body}>
+        <GitOwnerInput />
+      </div>
     </div>
   );
 }
