@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import { useSetAtom } from 'jotai';
+import { useSetAtom, useAtomValue } from 'jotai';
 import { Input, Button } from 'antd';
-import { gitOwnerAtom } from '../store/atoms';
+import { gitOwnerAtom, currentStepAtom } from '../store/atoms';
 import styles from './GitOwnerInput.module.css';
 
 function GitOwnerInput() {
-  const [inputValue, setInputValue] = useState('');
+  const gitOwner = useAtomValue(gitOwnerAtom);
+  const [inputValue, setInputValue] = useState(gitOwner);
   const setGitOwner = useSetAtom(gitOwnerAtom);
+  const setCurrentStep = useSetAtom(currentStepAtom);
 
   const handleSubmit = () => {
     if (inputValue.trim()) {
       setGitOwner(inputValue.trim());
       console.log('Git Owner submitted:', inputValue.trim());
+      setCurrentStep('repo');
     }
   };
 

@@ -1,7 +1,12 @@
+import { useAtomValue } from 'jotai';
+import { currentStepAtom } from '../store/atoms';
 import styles from './Index.module.css';
 import GitOwnerInput from './GitOwnerInput';
+import GitRepoInput from './GitRepoInput';
 
 function Index() {
+  const currentStep = useAtomValue(currentStepAtom);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -9,7 +14,16 @@ function Index() {
         <span>Index Header</span>
       </header>
       <div className={styles.body}>
-        <GitOwnerInput />
+        <div
+          className={currentStep === 'owner' ? styles.fadeIn : styles.fadeOut}
+        >
+          {currentStep === 'owner' && <GitOwnerInput />}
+        </div>
+        <div
+          className={currentStep === 'repo' ? styles.fadeIn : styles.fadeOut}
+        >
+          {currentStep === 'repo' && <GitRepoInput />}
+        </div>
       </div>
     </div>
   );
