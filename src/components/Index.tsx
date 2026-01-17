@@ -1,5 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { currentStepAtom } from '../store/atoms';
+import config from '../config';
 import styles from './Index.module.css';
 import GitOwnerInput from './GitOwnerInput';
 import GitRepoInput from './GitRepoInput';
@@ -24,7 +25,14 @@ function Index() {
             }}
           />
         </div>
-        <span>Index Header</span>
+        <span>{config.appTitle}</span>
+        {config.isDevelopment && (
+          <span
+            style={{ marginLeft: 'auto', fontSize: '12px', color: '#52c41a' }}
+          >
+            DEV
+          </span>
+        )}
       </header>
       <div className={styles.body}>
         <div
