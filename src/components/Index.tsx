@@ -3,6 +3,7 @@ import { currentStepAtom } from '../store/atoms';
 import styles from './Index.module.css';
 import GitOwnerInput from './GitOwnerInput';
 import GitRepoInput from './GitRepoInput';
+import EnvSelect from './EnvSelect';
 
 function Index() {
   const currentStep = useAtomValue(currentStepAtom);
@@ -23,6 +24,9 @@ function Index() {
           className={currentStep === 'repo' ? styles.fadeIn : styles.fadeOut}
         >
           {currentStep === 'repo' && <GitRepoInput />}
+        </div>
+        <div className={currentStep === 'env' ? styles.fadeIn : styles.fadeOut}>
+          {currentStep === 'env' && <EnvSelect />}
         </div>
       </div>
     </div>

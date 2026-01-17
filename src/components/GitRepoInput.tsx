@@ -14,6 +14,7 @@ function GitRepoInput() {
     if (inputValue.trim()) {
       setGitRepo(inputValue.trim());
       console.log('Git Repo submitted:', inputValue.trim());
+      setCurrentStep('env');
     }
   };
 
