@@ -18,6 +18,7 @@ function DateSelect() {
       const dateStr = selectedDate.format('YYYY-MM-DD');
       setDate(dateStr);
       console.log('Date submitted:', dateStr);
+      setCurrentStep('summary');
     }
   };
 
