@@ -1,5 +1,5 @@
 import { useSetAtom, useAtomValue } from 'jotai';
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
 import {
@@ -9,6 +9,7 @@ import {
   dateAtom,
   currentStepAtom,
 } from '../../store/atoms';
+import { createBranch } from '../../services/api';
 
 dayjs.extend(dayOfYear);
 
@@ -52,16 +53,31 @@ export const useSummary = () => {
       content: `Are you sure you want to submit the summary? with create Branch release/${version} on ${gitOwner}/${gitRepo}`,
       okText: 'Confirm',
       cancelText: 'Cancel',
-      onOk: () => {
-        console.log('Summary submitted:', {
-          gitOwner,
-          gitRepo,
-          env,
-          date,
-          version,
-          branch: `release/${version}`,
-        });
-        // 暂时不做任何事情
+      onOk: async () => {
+        try {
+          const response = await createBranch({
+            owner: gitOwner,
+            repo: gitRepo,
+            date,
+            env,
+            version,
+          });
+
+          console.log('Summary submitted:', {
+            gitOwner,
+            gitRepo,
+            env,
+            date,
+            version,
+            branch: `release/${version}`,
+            response,
+          });
+
+          message.success('Branch created successfully!');
+        } catch (error) {
+          console.error('Failed to create branch:', error);
+          message.error('Failed to create branch. Please try again.');
+        }
       },
     });
   };
