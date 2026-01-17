@@ -4,6 +4,7 @@ import styles from './Index.module.css';
 import GitOwnerInput from './GitOwnerInput';
 import GitRepoInput from './GitRepoInput';
 import EnvSelect from './EnvSelect';
+import DateSelect from './DateSelect';
 
 function Index() {
   const currentStep = useAtomValue(currentStepAtom);
@@ -27,6 +28,11 @@ function Index() {
         </div>
         <div className={currentStep === 'env' ? styles.fadeIn : styles.fadeOut}>
           {currentStep === 'env' && <EnvSelect />}
+        </div>
+        <div
+          className={currentStep === 'date' ? styles.fadeIn : styles.fadeOut}
+        >
+          {currentStep === 'date' && <DateSelect />}
         </div>
       </div>
     </div>

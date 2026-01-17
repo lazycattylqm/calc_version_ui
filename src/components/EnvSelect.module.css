@@ -46,6 +46,36 @@
   justify-content: center;
   font-size: 16px;
   font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.radioGroup :global(.ant-radio-button-wrapper) {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.radioGroup :global(.ant-radio-button-wrapper:hover) {
+  border-color: rgba(24, 144, 255, 0.6);
+  background: rgba(24, 144, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+}
+
+.radioGroup :global(.ant-radio-button-wrapper-checked) {
+  border-color: #1890ff !important;
+  background: rgba(24, 144, 255, 0.3) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  transform: scale(1.05);
+  box-shadow:
+    0 0 20px rgba(24, 144, 255, 0.6),
+    0 0 40px rgba(24, 144, 255, 0.4);
+}
+
+.radioGroup :global(.ant-radio-button-wrapper-checked::before) {
+  display: none;
 }
 
 .buttonGroup {

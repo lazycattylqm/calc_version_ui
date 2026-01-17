@@ -14,6 +14,7 @@ function EnvSelect() {
     if (selectedEnv) {
       setEnv(selectedEnv);
       console.log('Environment submitted:', selectedEnv);
+      setCurrentStep('date');
     }
   };
 

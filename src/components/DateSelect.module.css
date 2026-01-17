@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 40px 20px;
+}
+
+.inputWrapper {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.hint {
+  margin: 0 0 24px 0;
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+.datePicker {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.backButton {
+  flex: 1;
+}
+
+.submitButton {
+  flex: 2;
+}
