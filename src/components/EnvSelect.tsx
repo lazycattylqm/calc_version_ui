@@ -1,26 +1,15 @@
-import { useState } from 'react';
-import { useSetAtom, useAtomValue } from 'jotai';
 import { Radio, Button } from 'antd';
-import { envAtom, currentStepAtom } from '../store/atoms';
-import styles from './EnvSelect.module.css';
+import { useEnvSelect } from './hooks/useEnvSelect';
+import styles from './styles/EnvSelect.module.css';
 
 function EnvSelect() {
-  const env = useAtomValue(envAtom);
-  const [selectedEnv, setSelectedEnv] = useState<'sde3' | 'sde4' | ''>(env);
-  const setEnv = useSetAtom(envAtom);
-  const setCurrentStep = useSetAtom(currentStepAtom);
-
-  const handleSubmit = () => {
-    if (selectedEnv) {
-      setEnv(selectedEnv);
-      console.log('Environment submitted:', selectedEnv);
-      setCurrentStep('date');
-    }
-  };
-
-  const handleBack = () => {
-    setCurrentStep('repo');
-  };
+  const {
+    selectedEnv,
+    handleEnvChange,
+    handleSubmit,
+    handleBack,
+    isSubmitDisabled,
+  } = useEnvSelect();
 
   return (
     <div className={styles.container}>
@@ -30,7 +19,7 @@ function EnvSelect() {
         <Radio.Group
           className={styles.radioGroup}
           value={selectedEnv}
-          onChange={(e) => setSelectedEnv(e.target.value)}
+          onChange={(e) => handleEnvChange(e.target.value)}
           size="large"
         >
           <Radio.Button value="sde3" className={styles.radioButton}>
@@ -53,7 +42,7 @@ function EnvSelect() {
             type="primary"
             size="large"
             onClick={handleSubmit}
-            disabled={!selectedEnv}
+            disabled={isSubmitDisabled}
           >
             Submit
           </Button>

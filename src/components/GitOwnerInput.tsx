@@ -1,22 +1,10 @@
-import { useState } from 'react';
-import { useSetAtom, useAtomValue } from 'jotai';
 import { Input, Button } from 'antd';
-import { gitOwnerAtom, currentStepAtom } from '../store/atoms';
-import styles from './GitOwnerInput.module.css';
+import { useGitOwnerInput } from './hooks/useGitOwnerInput';
+import styles from './styles/GitOwnerInput.module.css';
 
 function GitOwnerInput() {
-  const gitOwner = useAtomValue(gitOwnerAtom);
-  const [inputValue, setInputValue] = useState(gitOwner);
-  const setGitOwner = useSetAtom(gitOwnerAtom);
-  const setCurrentStep = useSetAtom(currentStepAtom);
-
-  const handleSubmit = () => {
-    if (inputValue.trim()) {
-      setGitOwner(inputValue.trim());
-      console.log('Git Owner submitted:', inputValue.trim());
-      setCurrentStep('repo');
-    }
-  };
+  const { inputValue, handleInputChange, handleSubmit, isSubmitDisabled } =
+    useGitOwnerInput();
 
   return (
     <div className={styles.container}>
@@ -29,7 +17,7 @@ function GitOwnerInput() {
           className={styles.input}
           placeholder="e.g., facebook, microsoft, google"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => handleInputChange(e.target.value)}
           onPressEnter={handleSubmit}
           size="large"
         />
@@ -38,7 +26,7 @@ function GitOwnerInput() {
           type="primary"
           size="large"
           onClick={handleSubmit}
-          disabled={!inputValue.trim()}
+          disabled={isSubmitDisabled}
         >
           Submit
         </Button>

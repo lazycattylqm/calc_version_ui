@@ -1,30 +1,15 @@
-import { useState } from 'react';
-import { useSetAtom, useAtomValue } from 'jotai';
 import { DatePicker, Button } from 'antd';
-import dayjs, { Dayjs } from 'dayjs';
-import { dateAtom, currentStepAtom } from '../store/atoms';
-import styles from './DateSelect.module.css';
+import { useDateSelect } from './hooks/useDateSelect';
+import styles from './styles/DateSelect.module.css';
 
 function DateSelect() {
-  const savedDate = useAtomValue(dateAtom);
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(
-    savedDate ? dayjs(savedDate) : null
-  );
-  const setDate = useSetAtom(dateAtom);
-  const setCurrentStep = useSetAtom(currentStepAtom);
-
-  const handleSubmit = () => {
-    if (selectedDate) {
-      const dateStr = selectedDate.format('YYYY-MM-DD');
-      setDate(dateStr);
-      console.log('Date submitted:', dateStr);
-      setCurrentStep('summary');
-    }
-  };
-
-  const handleBack = () => {
-    setCurrentStep('env');
-  };
+  const {
+    selectedDate,
+    handleDateChange,
+    handleSubmit,
+    handleBack,
+    isSubmitDisabled,
+  } = useDateSelect();
 
   return (
     <div className={styles.container}>
@@ -34,7 +19,7 @@ function DateSelect() {
         <DatePicker
           className={styles.datePicker}
           value={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
+          onChange={handleDateChange}
           size="large"
           format="YYYY-MM-DD"
           placeholder="Select date"
@@ -52,7 +37,7 @@ function DateSelect() {
             type="primary"
             size="large"
             onClick={handleSubmit}
-            disabled={!selectedDate}
+            disabled={isSubmitDisabled}
           >
             Submit
           </Button>

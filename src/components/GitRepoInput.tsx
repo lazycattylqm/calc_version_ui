@@ -1,26 +1,15 @@
-import { useState } from 'react';
-import { useSetAtom, useAtomValue } from 'jotai';
 import { Input, Button } from 'antd';
-import { gitRepoAtom, currentStepAtom } from '../store/atoms';
-import styles from './GitRepoInput.module.css';
+import { useGitRepoInput } from './hooks/useGitRepoInput';
+import styles from './styles/GitRepoInput.module.css';
 
 function GitRepoInput() {
-  const gitRepo = useAtomValue(gitRepoAtom);
-  const [inputValue, setInputValue] = useState(gitRepo);
-  const setGitRepo = useSetAtom(gitRepoAtom);
-  const setCurrentStep = useSetAtom(currentStepAtom);
-
-  const handleSubmit = () => {
-    if (inputValue.trim()) {
-      setGitRepo(inputValue.trim());
-      console.log('Git Repo submitted:', inputValue.trim());
-      setCurrentStep('env');
-    }
-  };
-
-  const handleBack = () => {
-    setCurrentStep('owner');
-  };
+  const {
+    inputValue,
+    handleInputChange,
+    handleSubmit,
+    handleBack,
+    isSubmitDisabled,
+  } = useGitRepoInput();
 
   return (
     <div className={styles.container}>
@@ -31,7 +20,7 @@ function GitRepoInput() {
           className={styles.input}
           placeholder="e.g., react, vscode, typescript"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => handleInputChange(e.target.value)}
           onPressEnter={handleSubmit}
           size="large"
         />
@@ -48,7 +37,7 @@ function GitRepoInput() {
             type="primary"
             size="large"
             onClick={handleSubmit}
-            disabled={!inputValue.trim()}
+            disabled={isSubmitDisabled}
           >
             Submit
           </Button>

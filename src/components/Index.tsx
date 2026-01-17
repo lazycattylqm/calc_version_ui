@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { currentStepAtom } from '../store/atoms';
 import config from '../config';
-import styles from './Index.module.css';
+import styles from './styles/Index.module.css';
 import GitOwnerInput from './GitOwnerInput';
 import GitRepoInput from './GitRepoInput';
 import EnvSelect from './EnvSelect';
