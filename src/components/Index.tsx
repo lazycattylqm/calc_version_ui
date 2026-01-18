@@ -11,6 +11,23 @@ import Summary from './Summary';
 function Index() {
   const currentStep = useAtomValue(currentStepAtom);
 
+  const renderStep = () => {
+    switch (currentStep) {
+      case 'owner':
+        return <GitOwnerInput />;
+      case 'repo':
+        return <GitRepoInput />;
+      case 'env':
+        return <EnvSelect />;
+      case 'date':
+        return <DateSelect />;
+      case 'summary':
+        return <Summary />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -35,29 +52,7 @@ function Index() {
         )}
       </header>
       <div className={styles.body}>
-        <div
-          className={currentStep === 'owner' ? styles.fadeIn : styles.fadeOut}
-        >
-          {currentStep === 'owner' && <GitOwnerInput />}
-        </div>
-        <div
-          className={currentStep === 'repo' ? styles.fadeIn : styles.fadeOut}
-        >
-          {currentStep === 'repo' && <GitRepoInput />}
-        </div>
-        <div className={currentStep === 'env' ? styles.fadeIn : styles.fadeOut}>
-          {currentStep === 'env' && <EnvSelect />}
-        </div>
-        <div
-          className={currentStep === 'date' ? styles.fadeIn : styles.fadeOut}
-        >
-          {currentStep === 'date' && <DateSelect />}
-        </div>
-        <div
-          className={currentStep === 'summary' ? styles.fadeIn : styles.fadeOut}
-        >
-          {currentStep === 'summary' && <Summary />}
-        </div>
+        <div className={styles.fadeIn}>{renderStep()}</div>
       </div>
     </div>
   );
