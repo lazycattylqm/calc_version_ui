@@ -50,23 +50,24 @@
 }
 
 .radioGroup :global(.ant-radio-button-wrapper) {
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.02);
+  color: #555;
   transition: all 0.3s ease;
 }
 
 .radioGroup :global(.ant-radio-button-wrapper:hover) {
   border-color: rgba(24, 144, 255, 0.6);
   background: rgba(24, 144, 255, 0.1);
+  color: #1890ff;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
 }
 
 .radioGroup :global(.ant-radio-button-wrapper-checked) {
   border-color: #1890ff !important;
-  background: rgba(24, 144, 255, 0.3) !important;
-  color: #ffffff !important;
+  background: rgba(24, 144, 255, 0.2) !important;
+  color: #1890ff !important;
   font-weight: 600;
   transform: scale(1.05);
   box-shadow:
