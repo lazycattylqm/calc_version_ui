@@ -22,13 +22,13 @@
   margin: 0 0 10px 0;
   font-size: 24px;
   font-weight: 600;
-  color: #ffffff;
+  color: #333333;
 }
 
 .hint {
   margin: 0 0 24px 0;
   font-size: 14px;
-  color: #e0e0e0;
+  color: #666666;
 }
 
 .descriptions {
@@ -37,20 +37,20 @@
 }
 
 .descriptions :global(.ant-descriptions-item-label) {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  background: rgba(0, 0, 0, 0.02);
+  color: #333;
   font-weight: 600;
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 0, 0, 0.06);
 }
 
 .descriptions :global(.ant-descriptions-item-content) {
-  background: rgba(255, 255, 255, 0.05);
-  color: #e0e0e0;
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.01);
+  color: #555;
+  border-color: rgba(0, 0, 0, 0.06);
 }
 
 .descriptions :global(.ant-descriptions-bordered .ant-descriptions-view) {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 0, 0, 0.06);
 }
 
 .buttonGroup {
