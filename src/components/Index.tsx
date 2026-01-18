@@ -1,4 +1,6 @@
 import { useAtomValue } from 'jotai';
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import { useRef } from 'react';
 import { currentStepAtom } from '../store/atoms';
 import config from '../config';
 import styles from './styles/Index.module.css';
@@ -10,6 +12,7 @@ import Summary from './Summary';
 
 function Index() {
   const currentStep = useAtomValue(currentStepAtom);
+  const nodeRef = useRef(null);
 
   const renderStep = () => {
     switch (currentStep) {
@@ -52,7 +55,24 @@ function Index() {
         )}
       </header>
       <div className={styles.body}>
-        <div className={styles.fadeIn}>{renderStep()}</div>
+        <SwitchTransition>
+          <CSSTransition
+            key={currentStep}
+            nodeRef={nodeRef}
+            timeout={300}
+            classNames={{
+              enter: styles.fadeEnter,
+              enterActive: styles.fadeEnterActive,
+              exit: styles.fadeExit,
+              exitActive: styles.fadeExitActive,
+            }}
+            unmountOnExit
+          >
+            <div ref={nodeRef} className={styles.stepContainer}>
+              {renderStep()}
+            </div>
+          </CSSTransition>
+        </SwitchTransition>
       </div>
     </div>
   );

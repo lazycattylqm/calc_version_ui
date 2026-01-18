@@ -41,13 +41,16 @@
 
 .body {
   flex: 1;
-  overflow: auto;
+  overflow: hidden; /* Changed from auto to hidden */
   padding: 20px;
   position: relative;
   background-image: url('/images/hsbc-bg.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  display: flex; /* For centering the step container */
+  justify-content: center; /* For centering the step container */
+  align-items: flex-start; /* Align items to the top */
 }
 
 .body::before {
@@ -57,13 +60,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Darken background slightly so content stays readable
+     even when the image is missing or background is white */
+  background-color: rgba(
+    240,
+    242,
+    245,
+    0.85
+  ); /* A light, semi-transparent background */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   pointer-events: none;
   z-index: 0;
 }
@@ -73,33 +79,34 @@
   z-index: 1;
 }
 
-.fadeIn {
-  animation: fadeIn 0.5s ease-in forwards;
+.stepContainer {
+  width: 100%;
+  max-width: 600px; /* Or any other max-width you prefer */
 }
 
-.fadeOut {
-  animation: fadeOut 0.5s ease-out forwards;
-  pointer-events: none;
+/* Fade Transition Classes */
+.fadeEnter {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.fadeEnterActive {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
+.fadeExit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fadeExitActive {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }

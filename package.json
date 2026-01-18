@@ -10,12 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/react-transition-group": "^4.4.12",
     "antd": "^6.2.0",
     "axios": "^1.13.2",
     "dayjs": "^1.11.19",
     "jotai": "^2.16.2",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
