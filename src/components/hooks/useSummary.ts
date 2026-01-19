@@ -30,13 +30,13 @@ export const useSummary = () => {
     const mm = selectedDate.format('MM');
     const yymm = yy + mm;
 
-    // wk: 计算是本年第几周（1月1日所在的周为第1周）
-    const yearStart = dayjs(selectedDate.format('YYYY') + '-01-01');
-    const dayOfYearNum = selectedDate.dayOfYear();
-    const yearStartDay = yearStart.day(); // 0 (Sunday) to 6 (Saturday)
+    // wk: 计算当月的第几周（当月从1号开始为第1周，周以周日为一周起始）
+    const dayOfMonth = selectedDate.date(); // 1-31
+    const monthStart = dayjs(selectedDate.format('YYYY') + '-' + selectedDate.format('MM') + '-01');
+    const monthStartDay = monthStart.day(); // 0 (Sunday) to 6 (Saturday)
 
-    // 计算周数：(当前天数 + 1月1日是星期几 - 1) / 7，向上取整
-    const weekNumber = Math.ceil((dayOfYearNum + yearStartDay) / 7);
+    // 计算当月周数：(当前日 + 当月1日是星期几) / 7，向上取整
+    const weekNumber = Math.ceil((dayOfMonth + monthStartDay) / 7);
     const wk = weekNumber.toString().padStart(2, '0');
 
     // env: sde3 -> 3, sde4 -> 4
